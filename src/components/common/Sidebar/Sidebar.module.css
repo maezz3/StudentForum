@@ -1,0 +1,176 @@
+.sidebar {
+  width: 280px;
+  background: white;
+  border-right: 1px solid var(--gray-200);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-shrink: 0; /* Важно: предотвращает сжатие */
+}
+
+.nav {
+  flex: 1;
+  padding: 20px 0;
+  overflow-y: auto; /* Прокрутка если много пунктов */
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 15px;
+  color: var(--gray-700);
+}
+
+.navItem:hover {
+  background: var(--gray-50);
+  color: var(--gray-900);
+}
+
+.navItemActive {
+  background: var(--primary-50);
+  color: var(--primary-700);
+  border-right: 3px solid var(--primary-500);
+  font-weight: 600;
+}
+
+.navItemActive .navIcon {
+  transform: scale(1.1);
+}
+
+.navIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  font-size: 18px;
+  transition: transform 0.2s;
+}
+
+.navLabel {
+  font-weight: 500;
+}
+
+.footer {
+  padding: 20px;
+  border-top: 1px solid var(--gray-200);
+  background: white;
+  flex-shrink: 0; /* Фиксируем footer внизу sidebar */
+}
+
+.stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.statNumber {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary-600);
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-top: 4px;
+}
+
+.currentGroup {
+  padding: 12px;
+  background: var(--primary-50);
+  border-radius: 8px;
+  border: 1px solid var(--primary-100);
+}
+
+.groupName {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-700);
+  margin-bottom: 4px;
+}
+
+.groupType {
+  display: block;
+  font-size: 12px;
+  color: var(--primary-600);
+  padding: 2px 6px;
+  background: var(--primary-100);
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.userSidebar {
+  padding: 20px;
+  border-top: 1px solid var(--gray-200);
+  background: var(--gray-50);
+}
+
+.userSidebarHeader {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-500);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.userStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.userStatusRole {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--gray-200);
+}
+
+.roleIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.roleText {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+.guestInfo {
+  background: var(--primary-50);
+  border: 1px solid var(--primary-100);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.guestInfo p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--primary-700);
+  line-height: 1.4;
+}

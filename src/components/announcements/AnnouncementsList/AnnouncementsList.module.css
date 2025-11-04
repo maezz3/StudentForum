@@ -1,0 +1,126 @@
+.announcementsList {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filterButton {
+  padding: 8px 16px;
+  border: 1px solid var(--gray-300);
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--gray-600);
+  transition: all 0.2s;
+}
+
+.filterButton:hover {
+  border-color: var(--gray-400);
+  color: var(--gray-700);
+}
+
+.filterButton.active {
+  background: var(--primary-500);
+  color: white;
+  border-color: var(--primary-500);
+}
+
+.createButton {
+  padding: 10px 20px;
+  background: var(--primary-500);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.createButton:hover {
+  background: var(--primary-600);
+}
+
+.announcements {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 4px;
+}
+
+.pinnedSection,
+.regularSection {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0 0 16px 0;
+  padding-left: 8px;
+}
+
+.announcementsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--gray-500);
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+}
+
+.emptyIcon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.emptyState h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: var(--gray-700);
+}
+
+.emptyState p {
+  font-size: 16px;
+  margin: 0 0 20px 0;
+}
+
+.createFirstButton {
+  padding: 10px 20px;
+  background: var(--primary-500);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}

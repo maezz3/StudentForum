@@ -1,0 +1,119 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--gray-200);
+  background: white;
+  border-radius: 12px 12px 0 0;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.todayButton {
+  padding: 8px 16px;
+  background: var(--primary-500);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.todayButton:hover {
+  background: var(--primary-600);
+}
+
+.navigation {
+  display: flex;
+  gap: 4px;
+}
+
+.navButton {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--gray-300);
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.navButton:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-400);
+}
+
+.currentDate {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-left: 8px;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.viewSwitcher {
+  display: flex;
+  background: var(--gray-100);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.viewButton {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-600);
+  transition: all 0.2s;
+}
+
+.viewButton.active {
+  background: white;
+  color: var(--gray-900);
+  box-shadow: var(--shadow-sm);
+}
+
+.viewButton:hover:not(.active) {
+  color: var(--gray-700);
+}
+
+.createEventButton {
+  padding: 10px 16px;
+  background: var(--primary-500);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.createEventButton:hover {
+  background: var(--primary-600);
+}

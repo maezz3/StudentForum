@@ -1,0 +1,95 @@
+.chatWindow {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+  flex: 1;
+  min-height: 0; 
+}
+
+.chatHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--gray-200);
+  background: white;
+  border-radius: 12px 12px 0 0;
+  flex-shrink: 0;
+}
+
+.chatInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0 0 4px 0;
+}
+
+.chatStatus {
+  font-size: 12px;
+  color: var(--gray-500);
+}
+
+.chatActions {
+  display: flex;
+  gap: 8px;
+}
+
+.actionButton {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-size: 16px;
+}
+
+.actionButton:hover {
+  background: var(--gray-100);
+}
+
+.noChatSelected {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  text-align: center;
+  color: var(--gray-500);
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+}
+
+.noChatIcon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.noChatSelected h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: var(--gray-700);
+}
+
+.noChatSelected p {
+  font-size: 14px;
+  margin: 0;
+  max-width: 300px;
+  line-height: 1.5;
+}

@@ -1,0 +1,202 @@
+.fileBrowser {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--gray-200);
+  background: var(--gray-50);
+  border-radius: 12px 12px 0 0;
+}
+
+.search {
+  flex: 1;
+  max-width: 400px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  font-size: 14px;
+  background: white;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.createFolderButton,
+.uploadButton {
+  padding: 10px 16px;
+  border: 1px solid var(--gray-300);
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.createFolderButton:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-400);
+}
+
+.uploadButton {
+  background: var(--primary-500);
+  color: white;
+  border-color: var(--primary-500);
+}
+
+.uploadButton:hover {
+  background: var(--primary-600);
+}
+
+.browserContent {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.sidebar {
+  width: 280px;
+  border-right: 1px solid var(--gray-200);
+  background: var(--gray-50);
+  padding: 20px 0;
+}
+
+.folderList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.folderItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--gray-700);
+  transition: all 0.2s;
+}
+
+.folderItem:hover {
+  background: var(--gray-200);
+}
+
+.folderItemActive {
+  background: var(--primary-50);
+  color: var(--primary-700);
+  font-weight: 500;
+}
+
+.folderIcon {
+  font-size: 16px;
+  width: 20px;
+}
+
+.folderName {
+  flex: 1;
+  text-align: left;
+}
+
+.fileCount {
+  background: var(--gray-300);
+  color: var(--gray-600);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.folderItemActive .fileCount {
+  background: var(--primary-200);
+  color: var(--primary-700);
+}
+
+.mainArea {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.currentFolder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.folderTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0;
+}
+
+.folderStats {
+  font-size: 14px;
+  color: var(--gray-500);
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  color: var(--gray-500);
+}
+
+.emptyIcon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.emptyState h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: var(--gray-700);
+}
+
+.emptyState p {
+  font-size: 16px;
+  margin: 0 0 20px 0;
+}
+
+.uploadFirstButton {
+  padding: 10px 20px;
+  background: var(--primary-500);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
