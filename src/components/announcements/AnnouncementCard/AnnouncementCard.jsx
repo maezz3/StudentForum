@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from './AnnouncementCard.module.css';
+import Icon from '../../common/Icon/Icon';
+
 
 const AnnouncementCard = ({ announcement, currentUser, onDelete, onTogglePin }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -78,14 +80,17 @@ const AnnouncementCard = ({ announcement, currentUser, onDelete, onTogglePin }) 
                 onClick={() => onTogglePin(announcement.id)}
                 title={announcement.is_pinned ? 'Открепить' : 'Закрепить'}
               >
-                {announcement.is_pinned ? '📌' : '📍'}
+                <Icon 
+                  name={announcement.is_pinned ? "PinOff" : "Pin"} 
+                  size={20} 
+                />
               </button>
               <button 
                 className={styles.deleteButton}
                 onClick={() => onDelete(announcement.id)}
                 title="Удалить"
               >
-                🗑️
+                <Icon name="Trash2" size={20} />
               </button>
             </>
           )}
@@ -100,6 +105,10 @@ const AnnouncementCard = ({ announcement, currentUser, onDelete, onTogglePin }) 
             className={styles.expandButton}
             onClick={toggleExpand}
           >
+            <Icon 
+              name={isExpanded ? "ChevronUp" : "ChevronDown"} 
+              size={16} 
+            />
             {isExpanded ? 'Свернуть' : 'Читать полностью'}
           </button>
         )}

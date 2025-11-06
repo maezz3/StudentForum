@@ -1,5 +1,6 @@
 import React from 'react';
 import AnnouncementsList from '../../components/announcements/AnnouncementsList/AnnouncementsList';
+import Icon from '../../components/common/Icon/Icon';
 import styles from './AnnouncementsPage.module.css';
 
 const AnnouncementsPage = ({ group, onBack }) => {
@@ -7,7 +8,8 @@ const AnnouncementsPage = ({ group, onBack }) => {
     <div className={styles.announcementsPage}>
       <div className={styles.header}>
         <button className={styles.backButton} onClick={onBack}>
-          ← Назад к группам
+          <Icon name="ArrowBigLeft" size={16} />
+          Назад к группам
         </button>
         <div className={styles.groupInfo}>
           <h2>Объявления группы: {group.title}</h2>

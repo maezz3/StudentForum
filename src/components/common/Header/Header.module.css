@@ -4,12 +4,18 @@
   justify-content: space-between;
   padding: 0 24px;
   height: 70px;
-  background: white;
+  background: var(--bg-header);
   border-bottom: 1px solid var(--gray-200);
   box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
   z-index: 100;
+}
+
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .logo {
@@ -25,7 +31,7 @@
 .logoText {
   font-size: 20px;
   font-weight: 700;
-  color: var(--gray-900);
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -36,13 +42,26 @@
   margin: 0 40px;
 }
 
+.searchInputWrapper {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-500);
+}
+
 .searchInput {
+  color: var(--text-primary);
   width: 100%;
   padding: 10px 16px;
-  border: 1px solid var(--gray-300);
+  border: 1px solid var(--border-primary);
   border-radius: 8px;
   font-size: 14px;
-  background: var(--gray-50);
+  background: var(--bg-header);
   transition: all 0.2s;
 }
 
@@ -51,8 +70,8 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: white;
-  border: 1px solid var(--gray-200);
+  background: var(--bg-header);
+  border: 1px solid var(--border-primary);
   border-radius: 8px;
   box-shadow: var(--shadow-lg);
   margin-top: 8px;
@@ -64,12 +83,12 @@
 .searchInput:focus {
   outline: none;
   border-color: var(--primary-500);
-  background: white;
+  background: bg-primary;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .searchInput::placeholder {
-  color: var(--gray-400);
+  color: var(--text-tertiary);
 }
 
 .user {
@@ -88,7 +107,7 @@
 }
 
 .userInfo:hover {
-  background: var(--gray-50);
+  background: var(--bg-tertiary);
 }
 
 .userAvatar {
@@ -121,7 +140,7 @@
 .userName {
   font-size: 14px;
   font-weight: 600;
-  color: var(--gray-900);
+  color: var(--text-primary);
   line-height: 1.2;
 }
 
@@ -145,7 +164,7 @@
   top: 100%;
   right: 0;
   width: 280px;
-  background: white;
+  background: var(--bg-header);
   border-radius: 12px;
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--gray-200);
@@ -159,7 +178,7 @@
   align-items: center;
   gap: 12px;
   padding: 20px;
-  background: var(--gray-50);
+  background: var(--bg-tertiary);
 }
 
 .menuAvatar {
@@ -191,7 +210,7 @@
 .menuUserName {
   font-size: 16px;
   font-weight: 600;
-  color: var(--gray-900);
+  color: var(--text-primary);
   margin-bottom: 2px;
   white-space: nowrap;
   overflow: hidden;
@@ -206,7 +225,7 @@
 
 .menuUserEmail {
   font-size: 12px;
-  color: var(--gray-500);
+  color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -214,7 +233,7 @@
 
 .menuDivider {
   height: 1px;
-  background: var(--gray-200);
+  background: var(--bg-2);
 }
 
 .menuItem {
@@ -225,7 +244,7 @@
   text-align: left;
   cursor: pointer;
   font-size: 14px;
-  color: var(--gray-700);
+  color: var(--text-secondary);
   transition: background 0.2s;
   display: flex;
   align-items: center;
@@ -233,7 +252,7 @@
 }
 
 .menuItem:hover {
-  background: var(--gray-50);
+  background: var(--bg-secondary);
 }
 
 .resultsHeader {
@@ -241,15 +260,15 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--border-primary);
   font-size: 14px;
   font-weight: 600;
-  color: var(--gray-700);
+  color: var(--text-secondary);
 }
 
 .resultsHeader small {
   font-weight: normal;
-  color: var(--gray-500);
+  color: var(--text-secondary);
 }
 
 .resultsList {
@@ -267,7 +286,7 @@
   padding: 8px 16px;
   font-size: 12px;
   font-weight: 600;
-  color: var(--gray-600);
+  color: var(--bg-pr-3);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -287,7 +306,7 @@
 }
 
 .resultItem:hover {
-  background: var(--gray-50);
+  background: var(--bg-secondary);
 }
 
 .resultIcon {
@@ -303,7 +322,7 @@
 .resultTitle {
   font-size: 14px;
   font-weight: 500;
-  color: var(--gray-900);
+  color: var(--text-primary);
   margin-bottom: 2px;
   white-space: nowrap;
   overflow: hidden;
@@ -312,7 +331,7 @@
 
 .resultDescription {
   font-size: 12px;
-  color: var(--gray-500);
+  color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -334,5 +353,17 @@
 
 .noResultsText {
   font-size: 14px;
-  color: var(--gray-600);
+  color: var(--text-secondary);
+}
+
+.themeToggle {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

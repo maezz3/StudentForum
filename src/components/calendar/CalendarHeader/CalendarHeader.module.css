@@ -103,6 +103,9 @@
 }
 
 .createEventButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   padding: 10px 16px;
   background: var(--primary-500);
   color: white;

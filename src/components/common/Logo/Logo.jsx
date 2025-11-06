@@ -15,13 +15,6 @@ const Logo = ({
     }
   };
 
-  const getTextColor = () => {
-    switch (variant) {
-      case 'white': return '#ffffff';
-      default: return 'var(--gray-900)';
-    }
-  };
-
   return (
     <div className={styles.logo}>
       <svg 
@@ -35,10 +28,16 @@ const Logo = ({
         {/* Академическое здание */}
         <path 
           d="M16 2L4 8V24L16 30L28 24V8L16 2Z" 
+          fill="none"
+          stroke="white"
+          strokeWidth="3" // Толстая белая обводка
+        />
+        
+        {/* Внутренняя цветная обводка */}
+        <path 
+          d="M16 2L4 8V24L16 30L28 24V8L16 2Z" 
           fill={getLogoColor()}
           fillOpacity={variant === 'minimal' ? 0.1 : 1}
-          stroke={getLogoColor()}
-          strokeWidth={variant === 'minimal' ? 2 : 0}
         />
         
         {/* Окна */}
@@ -55,10 +54,7 @@ const Logo = ({
       </svg>
       
       {withText && (
-        <span 
-          className={styles.logoText}
-          style={{ color: getTextColor() }}
-        >
+        <span className={styles.logoText}>
           Студенческий форум
         </span>
       )}

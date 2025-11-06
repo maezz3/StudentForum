@@ -43,7 +43,10 @@
 }
 
 .createButton {
-  padding: 10px 20px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding:10px 20px;
   background: var(--primary-500);
   color: white;
   border: none;

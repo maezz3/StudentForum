@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import styles from './AuthPage.module.css';
+import Icon from '../../components/common/Icon/Icon';
 import Logo from '../../components/common/Logo/Logo';
 
 const AuthPage = () => {
@@ -15,7 +16,9 @@ const AuthPage = () => {
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const { login, register, isAuthenticated } = useAuth();
 
   // Валидация email
@@ -124,6 +127,14 @@ const AuthPage = () => {
     return isValid;
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setApiError('');
@@ -177,9 +188,9 @@ const AuthPage = () => {
     return (
       <div className={styles.authPage}>
         <div className={styles.alreadyAuthed}>
-          <div className={styles.successIcon}>✅</div>
-          <h2>Вы уже авторизованы!</h2>
-          <p>Перейдите на главную страницу для продолжения работы.</p>
+          <Icon name="CheckCircle" size={48} className={styles.successIcon} />
+          <h2>Вы авторизованы!</h2>
+          <p>Перейдите на страницу всех групп для продолжения работы.</p>
         </div>
       </div>
     );
@@ -206,85 +217,129 @@ const AuthPage = () => {
           {!isLogin && (
             <>
               <div className={styles.formGroup}>
-                <label htmlFor="username">Имя пользователя *</label>
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  className={errors.username ? styles.invalid : ''}
-                  placeholder="ivan_student"
-                />
+                <div className={styles.inputWrapper}>
+                  <Icon name="PencilLine" size={20} className={styles.inputIcon} />
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    className={errors.username ? styles.invalid : ''}
+                    placeholder="Введите имя пользователя"
+                  />
+                </div>
                 {errors.username && (
-                  <span className={styles.errorText}>{errors.username}</span>
+                  <span className={styles.errorText}>
+                    <Icon name="AlertCircle" size={14} />
+                    {errors.username}</span>
                 )}
               </div>
 
               <div className={styles.formGroup}>
-                <label htmlFor="fullname">ФИО *</label>
-                <input
-                  type="text"
-                  id="fullname"
-                  name="fullname"
-                  value={formData.fullname}
-                  onChange={handleChange}
-                  className={errors.fullname ? styles.invalid : ''}
-                  placeholder="Иван Иванов"
-                />
+                <div className={styles.inputWrapper}>
+                  <Icon name="UserSquare" size={20} className={styles.inputIcon} />
+                  <input
+                    type="text"
+                    id="fullname"
+                    name="fullname"
+                    value={formData.fullname}
+                    onChange={handleChange}
+                    className={`${styles.input} ${errors.fullname ? styles.invalid : ''}`}
+                    placeholder="Введите ФИО"
+                  />
+                </div>
                 {errors.fullname && (
-                  <span className={styles.errorText}>{errors.fullname}</span>
+                  <span className={styles.errorText}>
+                    <Icon name="AlertCircle" size={14} />
+                    {errors.fullname}
+                  </span>
                 )}
               </div>
             </>
           )}
           
           <div className={styles.formGroup}>
-            <label htmlFor="email">Email *</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className={errors.email ? styles.invalid : ''}
-              placeholder="ivan@example.com"
-            />
+            <div className={styles.inputWrapper}>
+              <Icon name="Mail" size={20} className={styles.inputIcon} />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={`${styles.input} ${errors.email ? styles.invalid : ''}`}
+                placeholder="Введите email"
+              />
+            </div>
             {errors.email && (
-              <span className={styles.errorText}>{errors.email}</span>
+              <span className={styles.errorText}>
+                <Icon name="AlertCircle" size={14} />
+                {errors.email}
+              </span>
             )}
           </div>
           
           <div className={styles.formGroup}>
-            <label htmlFor="password">Пароль *</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className={errors.password ? styles.invalid : ''}
-              placeholder="Минимум 8 символов"
-            />
+            <div className={styles.inputWrapper}>
+              <Icon name="Shield" size={20} className={styles.inputIcon} />
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={`${styles.input} ${errors.password ? styles.invalid : ''}`}
+                placeholder="Введите пароль"
+              />
+              <button
+                type="button"
+                className={styles.passwordToggle}
+                onClick={togglePasswordVisibility}
+              >
+                <Icon 
+                  name={showPassword ? "EyeOff" : "Eye"} 
+                  size={20} 
+                />
+              </button>
+            </div>
             {errors.password && (
-              <span className={styles.errorText}>{errors.password}</span>
+              <span className={styles.errorText}>
+                <Icon name="AlertCircle" size={14} />
+                {errors.password}
+              </span>
             )}
           </div>
           
           {!isLogin && (
             <div className={styles.formGroup}>
-              <label htmlFor="confirmPassword">Подтвердите пароль *</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                className={errors.confirmPassword ? styles.invalid : ''}
-                placeholder="Повторите пароль"
-              />
+              <div className={styles.inputWrapper}>
+                <Icon name="ShieldCheck" size={20} className={styles.inputIcon} />
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  className={`${styles.input} ${errors.confirmPassword ? styles.invalid : ''}`}
+                  placeholder="Подтвердите пароль"
+                />
+                <button
+                  type="button"
+                  className={styles.passwordToggle}
+                  onClick={toggleConfirmPasswordVisibility}
+                >
+                  <Icon 
+                    name={showConfirmPassword ? "EyeOff" : "Eye"} 
+                    size={20} 
+                  />
+                </button>
+              </div>
               {errors.confirmPassword && (
-                <span className={styles.errorText}>{errors.confirmPassword}</span>
+                <span className={styles.errorText}>
+                  <Icon name="AlertCircle" size={14} />
+                  {errors.confirmPassword}
+                </span>
               )}
             </div>
           )}
@@ -294,7 +349,22 @@ const AuthPage = () => {
             className={styles.submitButton}
             disabled={isLoading}
           >
-            {isLoading ? 'Загрузка...' : isLogin ? 'Войти' : 'Зарегистрироваться'}
+            {isLoading ? (
+              <>
+                <Icon name="Loader" size={18} className={styles.loadingIcon} />
+                Загрузка...
+              </>
+            ) : isLogin ? (
+              <>
+                <Icon name="LogIn" size={18} />
+                Войти
+              </>
+            ) : (
+              <>
+                <Icon name="UserPlus" size={18} />
+                Зарегистрироваться
+              </>
+            )}
           </button>
         </form>
         
@@ -324,9 +394,12 @@ const AuthPage = () => {
 
         <div className={styles.roleInfo}>
           <p>
-            💡 <strong>Все новые пользователи получают роль "Гость"</strong>
-            <br />
-            Для получения роли "Студент" или "Преподаватель" обратитесь к администрации
+            <Icon name="Info" size={16} />
+            <span className={styles.roleInfoContent}>
+              <strong>Все новые пользователи получают роль "Гость"</strong>
+              <br />
+              Для получения роли "Студент" или "Преподаватель" обратитесь к администрации
+            </span>
           </p>
         </div>
       </div>

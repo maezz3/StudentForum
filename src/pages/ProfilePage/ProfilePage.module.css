@@ -92,6 +92,9 @@
 }
 
 .editButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   padding: 8px 16px;
   border: 1px solid var(--gray-300);
   background: white;

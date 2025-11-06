@@ -101,6 +101,7 @@
 }
 
 .expandButton {
+  display: flex;
   background: none;
   border: none;
   color: var(--primary-500);

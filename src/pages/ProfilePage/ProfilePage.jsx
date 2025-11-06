@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Icon from '../../components/common/Icon/Icon';
 import styles from './ProfilePage.module.css';
 
 const ProfilePage = () => {
@@ -10,7 +11,7 @@ const ProfilePage = () => {
     role: 'student',
     avatar: '',
     status: 'Студент МАИ',
-    registered_at: '2024-09-01T00:00:00Z'
+    registered_at: '2025-09-01T00:00:00Z'
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -54,16 +55,20 @@ const ProfilePage = () => {
         <div className={styles.sidebar}>
           <nav className={styles.nav}>
             <button className={`${styles.navItem} ${styles.navItemActive}`}>
-              👤 Основная информация
+              <Icon name="BookOpenText" />
+              Основная информация
             </button>
             <button className={styles.navItem}>
-              🔐 Безопасность
+              <Icon name="ShieldUser" />
+              Безопасность
             </button>
             <button className={styles.navItem}>
-              🔔 Уведомления
+              <Icon name="Bell" />
+              Уведомления
             </button>
             <button className={styles.navItem}>
-              🎨 Внешний вид
+              <Icon name="Palette" />
+              Внешний вид
             </button>
           </nav>
         </div>
@@ -78,7 +83,8 @@ const ProfilePage = () => {
                   className={styles.editButton}
                   onClick={() => setIsEditing(true)}
                 >
-                  ✏️ Редактировать
+                  <Icon name="Pencil" />
+                  Редактировать
                 </button>
               ) : (
                 <div className={styles.editActions}>

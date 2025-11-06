@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import Header from './components/common/Header/Header';
 import Sidebar from './components/common/Sidebar/Sidebar';
 import Footer from './components/common/Footer/Footer';
+import { groupService } from './services/groupService';
 import './App.css';
 
 // Импортируем страницы
@@ -13,56 +15,84 @@ import AnnouncementsPage from './pages/AnnouncementsPage/AnnouncementsPage';
 import FilesPage from './pages/FilesPage/FilesPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
+import WelcomePage from './pages/WelcomePage/WelcomePage';
+import AboutPage from './pages/AboutPage/AboutPage';
 
-
-// Моковые данные
-const mockGroups = [
-  {
-    id: 1,
-    university_id: 1,
-    title: 'М8О-305Б-23',
-    description: 'Группа по базам данных 2023 года. Обсуждение лабораторных работ и проектов.',
-    code: 'M8O305B23',
-    type: 'open',
-    avatar: '',
-    chat: {
-      id: 1,
-      group_id: 1,
-      title: 'М8О-305Б-23 - Общий чат'
-    },
-    calendar: {
-      id: 1,
-      group_id: 1,
-      events: []
-    },
-    announcements: []
-  },
-  {
-    id: 2,
-    university_id: 1,
-    title: 'Авиационные системы',
-    description: 'Обсуждение современных авиационных технологий и систем управления.',
-    code: 'AVIASYSTEMS',
-    type: 'private',
-    avatar: '',
-    chat: {
-      id: 2,
-      group_id: 2,
-      messages: []
-    },
-    calendar: {
-      id: 2,
-      group_id: 2,
-      events: []
-    },
-    announcements: []
-  }
-];
 
 const AppContent = () => {
   const { user, loading } = useAuth();
-  const [currentPage, setCurrentPage] = useState('groups');
+  const [currentPage, setCurrentPage] = useState('welcome'); // Начинаем с welcome
   const [selectedGroup, setSelectedGroup] = useState(null);
+  const [groups, setGroups] = useState([]);
+  const [groupsLoading, setGroupsLoading] = useState(false);
+
+  const getMainContentClass = () => {
+    const baseClass = "main-content";
+    
+    // Страницы где не нужен padding и серый фон
+    const fullWidthPages = ['welcome', 'auth', 'about'];
+    
+    if (fullWidthPages.includes(currentPage)) {
+      return `${baseClass} ${baseClass}--full-width`;
+    }
+    
+    return baseClass;
+  };
+
+  useEffect(() => {
+    if (user) {
+      loadUserGroups();
+      // Если пользователь авторизован, переходим на группы
+      if (currentPage === 'welcome') {
+        setCurrentPage('groups');
+      }
+    }
+  }, [user, currentPage]);
+
+  useEffect(() => {
+    if (user && currentPage === 'welcome') {
+      setCurrentPage('groups');
+    }
+  }, [user, currentPage]);
+
+  const loadUserGroups = async () => {
+    setGroupsLoading(true);
+    try {
+      const userGroups = await groupService.getUserGroups();
+      setGroups(userGroups);
+    } catch (error) {
+      console.error('Failed to load groups:', error);
+      // Временно используем моковые данные
+      setGroups([
+        {
+          id: 1,
+          university_id: 1,
+          title: 'М8О-305Б-23',
+          description: 'Группа 8 института МАИ по направлении "Прикладная математика". Обсуждение лабораторных работ и проектов.',
+          code: 'M8O305B23',
+          type: 'open',
+          avatar: '',
+          chat: { id: 1, group_id: 1, title: 'М8О-305Б-23 - Общий чат' },
+          calendar: { id: 1, group_id: 1, events: [] },
+          announcements: []
+        },
+        {
+          id: 2,
+          university_id: 1,
+          title: 'Авиационные системы',
+          description: 'Обсуждение современных авиационных технологий и систем управления.',
+          code: 'AVIASYSTEMS',
+          type: 'private',
+          avatar: '',
+          chat: { id: 2, group_id: 2, messages: [] },
+          calendar: { id: 2, group_id: 2, events: [] },
+          announcements: []
+        }
+      ]);
+    } finally {
+      setGroupsLoading(false);
+    }
+  };
 
   // Показываем загрузку
   if (loading) {
@@ -72,11 +102,6 @@ const AppContent = () => {
         <p>Загрузка...</p>
       </div>
     );
-  }
-
-  // Если пользователь не авторизован, показываем страницу авторизации
-  if (!user) {
-    return <AuthPage />;
   }
 
   // Остальная логика приложения...
@@ -91,7 +116,22 @@ const AppContent = () => {
   };
 
   const renderContent = () => {
-    if (!selectedGroup && currentPage !== 'groups' && currentPage !== 'profile') {
+    // Если пользователь не авторизован и на главной - показываем Welcome
+    if (!user && currentPage === 'welcome') {
+      return <WelcomePage onNavigate={setCurrentPage} />;
+    }
+
+    // Редирект неавторизованных пользователей
+    if (!user && currentPage !== 'auth' && currentPage !== 'welcome' && currentPage !== 'about') {
+      return <WelcomePage onNavigate={setCurrentPage} />;
+    }
+
+    // Страница "О проекте" (объединяем помощь, о проекте и контакты)
+    if (currentPage === 'about') {
+      return <AboutPage onBack={() => setCurrentPage(user ? 'groups' : 'welcome')} />;
+    }
+
+    if (user && !selectedGroup && currentPage !== 'groups' && currentPage !== 'profile' && currentPage !== 'auth') {
       return (
         <div className="page-placeholder">
           <div className="placeholder-icon">👥</div>
@@ -116,13 +156,17 @@ const AppContent = () => {
     }
 
     switch (currentPage) {
+      case 'auth':
+        return <AuthPage />;
       case 'profile':
         return <ProfilePage />;
       case 'groups':
         return (
           <GroupsPage 
-            groups={mockGroups}
+            groups={groups}
+            groupsLoading={groupsLoading}
             onSelectGroup={handleSelectGroup}
+            onRefreshGroups={loadUserGroups}
           />
         );
       case 'chat':
@@ -166,18 +210,25 @@ const AppContent = () => {
 
   return (
     <div className="app">
-      <Header />
+      {user && <Header />}
       <div className="app-body">
-        <Sidebar 
-          currentPage={currentPage}
-          onPageChange={setCurrentPage}
-          selectedGroup={selectedGroup}
-        />
-        <main className="main-content">
+        {user && (
+          <Sidebar 
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+            selectedGroup={selectedGroup}
+          />
+        )}
+
+        <main className={getMainContentClass()}>
           {renderContent()}
         </main>
       </div>
-      <Footer />
+      <Footer 
+        onAboutClick={() => setCurrentPage('about')}
+        onHelpClick={() => setCurrentPage('about')}
+        onContactsClick={() => setCurrentPage('about')}
+      />
     </div>
   );
 };
@@ -185,9 +236,11 @@ const AppContent = () => {
 // Обертка с провайдером аутентификации
 const App = () => {
   return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </ThemeProvider>
   );
 };
 

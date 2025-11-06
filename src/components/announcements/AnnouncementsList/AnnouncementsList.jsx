@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AnnouncementCard from '../AnnouncementCard/AnnouncementCard';
 import CreateAnnouncementModal from '../CreateAnnouncementModal/CreateAnnouncementModal';
+import Icon from '../../common/Icon/Icon';
 import styles from './AnnouncementsList.module.css';
 
 const AnnouncementsList = ({ group }) => {
@@ -143,7 +144,8 @@ const AnnouncementsList = ({ group }) => {
             className={styles.createButton}
             onClick={() => setIsCreateModalOpen(true)}
           >
-            + Создать объявление
+            <Icon name="ListPlus" size={20}/>
+            Создать объявление
           </button>
         )}
       </div>

@@ -87,7 +87,8 @@ const CalendarHeader = ({
           className={styles.createEventButton}
           onClick={onCreateEvent}
         >
-          + Создать событие
+          <Icon name="CopyPlus" size={20} />
+          Создать событие
         </button>
       </div>
     </div>

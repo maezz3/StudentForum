@@ -1,5 +1,6 @@
 import React from 'react';
 import ChatWindow from '../../components/chat/ChatWindow/ChatWindow';
+import Icon from '../../components/common/Icon/Icon';
 import styles from './ChatPage.module.css';
 
 const ChatPage = ({ group, onBack }) => {
@@ -7,7 +8,8 @@ const ChatPage = ({ group, onBack }) => {
     <div className={styles.chatPage}>
       <div className={styles.header}>
         <button className={styles.backButton} onClick={onBack}>
-          ← Назад к группам
+          <Icon name="ArrowBigLeft" size={16} />
+          Назад к группам
         </button>
         <div className={styles.groupInfo}>
           <h2>Чат группы: {group.title}</h2>

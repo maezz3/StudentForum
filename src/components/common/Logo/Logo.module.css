@@ -13,4 +13,5 @@
   font-weight: 700;
   white-space: nowrap;
   letter-spacing: -0.02em;
+  color: var(--text-primary);
 }

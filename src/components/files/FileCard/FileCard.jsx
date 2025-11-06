@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Icon from '../../common/Icon/Icon';
 import styles from './FileCard.module.css';
 
 const FileCard = ({ file, currentUser, onDelete, onDownload }) => {
@@ -85,7 +86,7 @@ const FileCard = ({ file, currentUser, onDelete, onDownload }) => {
               onClick={handleDownload}
               title="Скачать"
             >
-              ⬇️
+              <Icon name="Download" size={16} />
             </button>
             {canDelete && (
               <button 
@@ -93,7 +94,7 @@ const FileCard = ({ file, currentUser, onDelete, onDownload }) => {
                 onClick={handleDelete}
                 title="Удалить"
               >
-                🗑️
+                <Icon name="Trash2" size={16} />
               </button>
             )}
           </div>

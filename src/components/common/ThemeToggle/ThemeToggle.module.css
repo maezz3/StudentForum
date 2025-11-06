@@ -1,0 +1,19 @@
+.themeToggle {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.themeToggle:hover {
+  background: var(--gray-200);
+}
+
+.theme-dark .themeToggle:hover {
+  background: var(--gray-200-dark);
+}

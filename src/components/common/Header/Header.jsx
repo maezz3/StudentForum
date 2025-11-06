@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../../context/AuthContext';
+import { useTheme } from '../../../context/ThemeContext';
 import Icon from '../Icon/Icon';
 import Logo from '../Logo/Logo';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import styles from './Header.module.css';
 
 const Header = () => {
@@ -111,12 +113,12 @@ const Header = () => {
 
   const getCategoryIcon = (category) => {
     const icons = {
-      groups: '👥',
-      messages: '💬',
-      events: '📅',
-      files: '📎'
+      groups: 'LayoutDashboard',
+      messages: 'MessageCircle',
+      events: 'Calendar',
+      files: 'Folder'
     };
-    return icons[category] || '🔍';
+    return icons[category] || 'Search';
   };
 
   const getCategoryLabel = (category) => {
@@ -137,14 +139,17 @@ const Header = () => {
       
       <div className={styles.search} ref={searchRef}>
         <form onSubmit={handleSearchSubmit}>
-          <input 
-            type="text" 
-            placeholder="Поиск групп, сообщений, событий..."
-            className={styles.searchInput}
-            value={searchQuery}
-            onChange={handleSearchChange}
-            onFocus={handleSearchFocus}
-          />
+          <div className={styles.searchInputWrapper}>
+            <input 
+              type="text" 
+              placeholder="Поиск групп, сообщений, событий..."
+              className={styles.searchInput}
+              value={searchQuery}
+              onChange={handleSearchChange}
+              onFocus={handleSearchFocus}
+            />
+            <Icon name="Search" size={18} className={styles.searchIcon} />
+          </div>
         </form>
         
         {showSearchResults && searchQuery && (
@@ -165,7 +170,7 @@ const Header = () => {
                 ).map(([category, items]) => (
                   <div key={category} className={styles.resultsCategory}>
                     <div className={styles.categoryHeader}>
-                      <span>{getCategoryIcon(category)}</span>
+                      <Icon name={getCategoryIcon(category)} size={18} />
                       <span>{getCategoryLabel(category)}</span>
                       <span className={styles.categoryCount}>({items.length})</span>
                     </div>
@@ -176,7 +181,7 @@ const Header = () => {
                         onClick={() => handleResultClick(item)}
                       >
                         <div className={styles.resultIcon}>
-                          {getCategoryIcon(category)}
+                          <Icon name={getCategoryIcon(category)} size={16} />
                         </div>
                         <div className={styles.resultContent}>
                           <div className={styles.resultTitle}>
@@ -193,7 +198,7 @@ const Header = () => {
               </div>
             ) : (
               <div className={styles.noResults}>
-                <div className={styles.noResultsIcon}>🔍</div>
+                <Icon name="Search" size={32} className={styles.noResultsIcon} />
                 <div className={styles.noResultsText}>
                   Ничего не найдено для "<strong>{searchQuery}</strong>"
                 </div>
@@ -203,76 +208,79 @@ const Header = () => {
         )}
       </div>
       
-      <div className={styles.user} ref={userMenuRef}>
-        <div 
-          className={styles.userInfo}
-          onClick={() => setShowUserMenu(!showUserMenu)}
-        >
-          <div className={styles.userAvatar}>
-            {user?.avatar ? (
-              <img src={user.avatar} alt={user.fullname} />
-            ) : (
-              <Icon name="User" size={20} color="white" />
-            )}
-          </div>
-          <div className={styles.userDetails}>
-            <span className={styles.userName}>{user?.fullname || 'Пользователь'}</span>
-            <span 
-              className={styles.userRole}
-              style={{ color: getRoleColor(user?.role) }}
-            >
-              {getRoleLabel(user?.role)}
-            </span>
-          </div>
-          <div className={`${styles.arrow} ${showUserMenu ? styles.arrowUp : ''}`}>
-            <Icon name="ChevronDown" size={16} />
-          </div>
-        </div>
-        
-        {showUserMenu && (
-          <div className={styles.userMenu}>
-            <div className={styles.menuHeader}>
-              <div className={styles.menuAvatar}>
-                {user?.avatar ? (
-                  <img src={user.avatar} alt={user.fullname} />
-                ) : (
-                  <Icon name="User" size={24} color="white" />
-                )}
-              </div>
-              <div className={styles.menuUserInfo}>
-                <div className={styles.menuUserName}>{user?.fullname}</div>
-                <div 
-                  className={styles.menuUserRole}
-                  style={{ color: getRoleColor(user?.role) }}
-                >
-                  {getRoleLabel(user?.role)}
-                </div>
-                <div className={styles.menuUserEmail}>{user?.email}</div>
-              </div>
+      <div className={styles.headerControls}>
+        <ThemeToggle />
+        <div className={styles.user} ref={userMenuRef}>
+          <div 
+            className={styles.userInfo}
+            onClick={() => setShowUserMenu(!showUserMenu)}
+          >
+            <div className={styles.userAvatar}>
+              {user?.avatar ? (
+                <img src={user.avatar} alt={user.fullname} />
+              ) : (
+                <Icon name="User" size={20} color="white" />
+              )}
             </div>
-            
-            <div className={styles.menuDivider}></div>
-            
-            <button className={styles.menuItem}>
-              <Icon name="User" size={16} />
-              Мой профиль
-            </button>
-            <button className={styles.menuItem}>
-              <Icon name="Settings" size={16} />
-              Настройки
-            </button>
-            
-            <div className={styles.menuDivider}></div>
-            
-            <button 
-              className={styles.menuItem}
-              onClick={handleLogout}
-            >
-              <Icon name="LogOut" size={16} />
-              Выйти
-            </button>
+            <div className={styles.userDetails}>
+              <span className={styles.userName}>{user?.fullname || 'Пользователь'}</span>
+              <span 
+                className={styles.userRole}
+                style={{ color: getRoleColor(user?.role) }}
+              >
+                {getRoleLabel(user?.role)}
+              </span>
+            </div>
+            <div className={`${styles.arrow} ${showUserMenu ? styles.arrowUp : ''}`}>
+              <Icon name="ChevronDown" size={16} />
+            </div>
           </div>
-        )}
+          
+          {showUserMenu && (
+            <div className={styles.userMenu}>
+              <div className={styles.menuHeader}>
+                <div className={styles.menuAvatar}>
+                  {user?.avatar ? (
+                    <img src={user.avatar} alt={user.fullname} />
+                  ) : (
+                    <Icon name="User" size={24} color="white" />
+                  )}
+                </div>
+                <div className={styles.menuUserInfo}>
+                  <div className={styles.menuUserName}>{user?.fullname}</div>
+                  <div 
+                    className={styles.menuUserRole}
+                    style={{ color: getRoleColor(user?.role) }}
+                  >
+                    {getRoleLabel(user?.role)}
+                  </div>
+                  <div className={styles.menuUserEmail}>{user?.email}</div>
+                </div>
+              </div>
+              
+              <div className={styles.menuDivider}></div>
+              
+              <button className={styles.menuItem}>
+                <Icon name="User" size={16} />
+                Мой профиль
+              </button>
+              <button className={styles.menuItem}>
+                <Icon name="Settings" size={16} />
+                Настройки
+              </button>
+              
+              <div className={styles.menuDivider}></div>
+              
+              <button 
+                className={styles.menuItem}
+                onClick={handleLogout}
+              >
+                <Icon name="LogOut" size={16} />
+                Выйти
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

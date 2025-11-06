@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import FileGrid from '../FileGrid/FileGrid';
 import FileUploadModal from '../FileUploadModal/FileUploadModal';
 import CreateFolderModal from '../CreateFolderModal/CreateFolderModal';
+import Icon from '../../common/Icon/Icon';
 import styles from './FileBrowser.module.css';
 
 const FileBrowser = ({ group }) => {
@@ -149,13 +150,15 @@ const FileBrowser = ({ group }) => {
             className={styles.createFolderButton}
             onClick={() => setIsCreateFolderModalOpen(true)}
           >
-            📁 Новая папка
+            <Icon name="FolderPlus" size={16} />
+            Новая папка
           </button>
           <button 
             className={styles.uploadButton}
             onClick={() => setIsUploadModalOpen(true)}
           >
-            📤 Загрузить файл
+            <Icon name="Upload" size={16} />
+            Загрузить файл
           </button>
         </div>
       </div>

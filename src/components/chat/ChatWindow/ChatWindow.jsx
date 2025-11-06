@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useChat } from '../../../hooks/useChat';
 import MessageList from '../MessageList/MessageList';
 import MessageInput from '../MessageInput/MessageInput';
 import TypingIndicator from '../TypingIndicator/TypingIndicator';
+import Icon from '../../common/Icon/Icon';
 import styles from './ChatWindow.module.css';
 
 const ChatWindow = ({ currentChat, currentUser }) => {
@@ -65,8 +66,12 @@ const ChatWindow = ({ currentChat, currentUser }) => {
           </span>
         </div>
         <div className={styles.chatActions}>
-          <button className={styles.actionButton} title="Участники">👥</button>
-          <button className={styles.actionButton} title="Настройки">⚙️</button>
+          <button className={styles.actionButton} title="Участники">
+            <Icon name="Users" size={20} />
+          </button>
+          <button className={styles.actionButton} title="Настройки">
+            <Icon name="Settings" size={20} />
+          </button>
         </div>
       </div>
       

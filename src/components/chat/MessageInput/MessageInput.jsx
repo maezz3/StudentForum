@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import Icon from '../../common/Icon/Icon';
 import styles from './MessageInput.module.css';
 
 const MessageInput = ({ onSendMessage, disabled = false }) => {
@@ -57,7 +58,7 @@ const MessageInput = ({ onSendMessage, disabled = false }) => {
               onClick={handleFileAttach}
               title="Прикрепить файл"
             >
-              📎
+              <Icon name="Paperclip" size={20} />
             </button>
             <button
               type="button"
@@ -65,7 +66,7 @@ const MessageInput = ({ onSendMessage, disabled = false }) => {
               onClick={() => insertEmoji('😊')}
               title="Добавить эмодзи"
             >
-              😀
+              <Icon name="Smile" size={20} />
             </button>
           </div>
 
@@ -94,7 +95,9 @@ const MessageInput = ({ onSendMessage, disabled = false }) => {
             disabled={!message.trim() || disabled}
             title="Отправить сообщение"
           >
-            <span className={styles.sendIcon}>➤</span>
+            <span className={styles.sendIcon}>
+              <Icon name="Send" size={20} />
+            </span>
           </button>
         </div>
 

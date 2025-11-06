@@ -1,0 +1,180 @@
+.aboutPage {
+  min-height: calc(100vh - 140px);
+  background: var(--gray-50);
+  padding: 40px 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--gray-900); /* Простой черный цвет */
+  margin: 20px 0 16px;
+}
+
+.content {
+  background: white;
+  border-radius: 16px;
+  padding: 48px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--gray-200);
+}
+
+.section {
+  margin-bottom: 48px;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.section h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--gray-200);
+}
+
+.section p {
+  font-size: 1.125rem;
+  color: var(--gray-700);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* FAQ стили */
+.faq {
+  margin-top: 24px;
+}
+
+.faq h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 24px 0 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.faq h3:first-child {
+  margin-top: 0;
+}
+
+.faq h3::before {
+  content: '•';
+  color: var(--primary-500);
+  font-size: 1.5rem;
+}
+
+.faq p {
+  font-size: 1rem;
+  color: var(--gray-600);
+  margin-left: 20px;
+  padding-left: 12px;
+  border-left: 3px solid var(--gray-300);
+}
+
+/* Контакты */
+.contacts {
+  margin-top: 24px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.contactItem:last-child {
+  border-bottom: none;
+}
+
+.contactItem span {
+  font-size: 1.125rem;
+  color: var(--gray-700);
+}
+
+/* Кнопка назад (если добавите) */
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--primary-500);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 24px;
+}
+
+.backButton:hover {
+  background: var(--primary-600);
+  transform: translateX(-2px);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .aboutPage {
+    padding: 20px 0;
+    min-height: calc(100vh - 120px);
+  }
+  
+  .container {
+    padding: 0 16px;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+  }
+  
+  .content {
+    padding: 32px 24px;
+    border-radius: 12px;
+  }
+  
+  .section h2 {
+    font-size: 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .section p {
+    font-size: 1rem;
+  }
+  
+  .contactItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 0;
+  }
+  
+  .contactItem span {
+    font-size: 1rem;
+  }
+}

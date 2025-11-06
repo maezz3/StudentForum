@@ -1,7 +1,8 @@
 import React from 'react';
+import Icon from '../Icon/Icon';
 import styles from './Footer.module.css';
 
-const Footer = () => {
+const Footer = ({ onAboutClick, onHelpClick, onContactsClick }) => {
   return (
     <footer className={styles.footer}>
       <div className={styles.content}>
@@ -9,9 +10,27 @@ const Footer = () => {
           © 2025 Студенческий форум. Все права защищены.
         </div>
         <div className={styles.links}>
-          <a href="#" className={styles.link}>Помощь</a>
-          <a href="#" className={styles.link}>О проекте</a>
-          <a href="#" className={styles.link}>Контакты</a>
+          <button 
+            className={styles.link}
+            onClick={onHelpClick}
+          >
+            <Icon name="HelpCircle" size={14} />
+            Помощь
+          </button>
+          <button 
+            className={styles.link}
+            onClick={onAboutClick}
+          >
+            <Icon name="Info" size={14} />
+            О проекте
+          </button>
+          <button 
+            className={styles.link}
+            onClick={onContactsClick}
+          >
+            <Icon name="Mail" size={14} />
+            Контакты
+          </button>
         </div>
       </div>
     </footer>

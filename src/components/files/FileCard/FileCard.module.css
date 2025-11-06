@@ -53,8 +53,8 @@
 }
 
 .downloadButton:hover {
-  background: var(--primary-100);
-  color: var(--primary-600);
+  background: var(--primary-600);
+  color: white;
 }
 
 .deleteButton:hover {
@@ -74,6 +74,7 @@
   line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
