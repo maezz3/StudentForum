@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { authService } from '../services/authService'; // Добавляем импорт
 
 export const USER_ROLES = {
   GUEST: 'guest',
@@ -23,47 +24,59 @@ export const AuthProvider = ({ children }) => {
 
   // Загрузка пользователя при старте приложения
   useEffect(() => {
-    const storedUser = localStorage.getItem('forum_user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
+    checkAuth();
   }, []);
 
-  const login = (userData) => {
-    const userWithRole = {
-      ...userData,
-      role: userData.role || USER_ROLES.GUEST // По умолчанию гость
-    };
-    setUser(userWithRole);
-    localStorage.setItem('forum_user', JSON.stringify(userWithRole));
+  const checkAuth = async () => {
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+      try {
+        const userData = await authService.getProfile();
+        setUser(userData);
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        authService.logout();
+      }
+    }
+    setLoading(false);
   };
 
-  const register = (userData) => {
-    const newUser = {
-      id: Date.now(),
-      username: userData.username,
-      fullname: userData.fullname,
-      email: userData.email,
-      role: USER_ROLES.GUEST, // Все новые пользователи - гости
-      avatar: '',
-      status: 'Новый пользователь',
-      registered_at: new Date().toISOString()
-    };
-    
-    setUser(newUser);
-    localStorage.setItem('forum_user', JSON.stringify(newUser));
+  const login = async (credentials) => {
+    try {
+      const response = await authService.login(credentials);
+      setUser(response.user);
+      return response;
+    } catch (error) {
+      console.error('Login failed:', error);
+      throw error;
+    }
+  };
+
+  const register = async (userData) => {
+    try {
+      const response = await authService.register(userData);
+      setUser(response.user);
+      return response;
+    } catch (error) {
+      console.error('Registration failed:', error);
+      throw error;
+    }
   };
 
   const logout = () => {
+    authService.logout();
     setUser(null);
-    localStorage.removeItem('forum_user');
   };
 
-  const updateUser = (updates) => {
-    const updatedUser = { ...user, ...updates };
-    setUser(updatedUser);
-    localStorage.setItem('forum_user', JSON.stringify(updatedUser));
+  const updateUser = async (updates) => {
+    try {
+      const updatedUser = await authService.updateProfile(updates);
+      setUser(updatedUser);
+      return updatedUser;
+    } catch (error) {
+      console.error('Profile update failed:', error);
+      throw error;
+    }
   };
 
   const updateRole = (newRole) => {

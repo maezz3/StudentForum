@@ -144,40 +144,25 @@ const AuthPage = () => {
     setIsLoading(true);
 
     try {
-      // Имитация API запроса
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
       if (isLogin) {
-        // Моковый вход
-        const mockUser = {
-          id: 1,
-          username: formData.email.split('@')[0], // Генерируем username из email
-          fullname: 'Тестовый Пользователь',
+        // Реальный вход через API
+        const credentials = {
           email: formData.email,
-          role: 'guest', // По умолчанию гость
-          avatar: '',
-          status: 'Новый пользователь',
-          registered_at: new Date().toISOString()
+          password: formData.password
         };
-        
-        login(mockUser);
+        await login(credentials);
       } else {
-        // Моковая регистрация
-        const newUser = {
-          id: Date.now(),
+        // Реальная регистрация через API
+        const userData = {
           username: formData.username,
           fullname: formData.fullname,
           email: formData.email,
-          role: 'guest', // Все новые пользователи - гости
-          avatar: '',
-          status: 'Новый пользователь',
-          registered_at: new Date().toISOString()
+          password: formData.password
         };
-        
-        register(newUser);
+        await register(userData);
       }
     } catch (err) {
-      setApiError(err.message || 'Произошла ошибка');
+      setApiError(err.message || 'Произошла ошибка при авторизации');
     } finally {
       setIsLoading(false);
     }

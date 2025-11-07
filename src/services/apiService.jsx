@@ -1,6 +1,6 @@
 class ApiService {
   constructor() {
-    this.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
+    this.baseURL = process.env.REACT_APP_API_URL || 'http://26.144.254.37:8000';
     this.token = localStorage.getItem('auth_token');
   }
 
@@ -36,13 +36,19 @@ class ApiService {
       // Обработка 401 ошибки (неавторизован)
       if (response.status === 401) {
         this.setToken(null);
-        window.location.href = '/login';
+        window.location.href = '/auth';
         throw new Error('Authentication required');
       }
       
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+        let errorMessage = `HTTP error! status: ${response.status}`;
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.detail || errorData.message || errorMessage;
+        } catch {
+          // Если не получилось распарсить JSON, используем стандартное сообщение
+        }
+        throw new Error(errorMessage);
       }
       
       // Для ответов без контента

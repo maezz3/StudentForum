@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-//import { groupService } from '../services/groupService';
+import { groupService } from '../services/groupService';
 
 export const useGroups = () => {
   const [groups, setGroups] = useState([]);
@@ -9,11 +9,13 @@ export const useGroups = () => {
   const loadGroups = useCallback(async () => {
     try {
       setLoading(true);
-      // Временно используем моковые данные
-      // const userGroups = await groupService.getUserGroups();
+      setError(null);
+      
+      const userGroups = await groupService.getUserGroups();
+      setGroups(userGroups);
       
       // Моковые данные
-      const userGroups = [
+      /* const userGroups = [
         {
           id: 1,
           university_id: 1,
@@ -38,10 +40,10 @@ export const useGroups = () => {
           calendar: { id: 2, group_id: 2, events: [] },
           announcements: []
         }
-      ];
-      setGroups(userGroups);
+      ]; */
     } catch (err) {
       setError(err.message);
+      console.error('Failed to load groups:', err);
     } finally {
       setLoading(false);
     }
@@ -49,26 +51,23 @@ export const useGroups = () => {
 
   const joinGroup = useCallback(async (groupId, inviteCode = null) => {
     try {
-      // Временно имитируем успешное вступление
-      // await groupService.joinGroup(groupId, inviteCode);
       
-      console.log(`Joining group ${groupId} with code: ${inviteCode}`);
+      await groupService.joinGroup(groupId, inviteCode);
       
-      // Имитация задержки API
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Обновляем список групп
       await loadGroups();
+
     } catch (err) {
+      console.error('Failed to join group:', err);
       throw err;
     }
   }, [loadGroups]);
 
   const leaveGroup = useCallback(async (groupId) => {
     try {
-      // await groupService.leaveGroup(groupId);
+      await groupService.leaveGroup(groupId);
       await loadGroups(); // Перезагружаем список групп
     } catch (err) {
+      console.error('Failed to leave group:', err);
       throw err;
     }
   }, [loadGroups]);

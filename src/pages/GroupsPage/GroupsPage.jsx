@@ -5,8 +5,9 @@ import GroupJoinModal from '../../components/groups/GroupJoinModal/GroupJoinModa
 import styles from './GroupsPage.module.css';
 
 const GroupsPage = ({ onSelectGroup }) => {
-  const { groups, loading, error, joinGroup } = useGroups();
+  const { groups, loading, error, joinGroup, refresh } = useGroups();
   const [joinModal, setJoinModal] = useState({ isOpen: false, group: null });
+  const [joinLoading, setJoinLoading] = useState(false);
 
   const handleJoinClick = (group) => {
     if (group.type === 'open') {
@@ -23,9 +24,12 @@ const GroupsPage = ({ onSelectGroup }) => {
       await joinGroup(groupId, inviteCode);
       setJoinModal({ isOpen: false, group: null });
       // Можно показать уведомление об успешном вступлении
+      console.log('Успешно вступили в группу');
     } catch (err) {
       console.error('Failed to join group:', err);
-      alert('Не удалось вступить в группу');
+      alert('Не удалось вступить в группу: ${err.message}');
+    } finally {
+      setJoinLoading(false);
     }
   };
 
@@ -44,7 +48,10 @@ const GroupsPage = ({ onSelectGroup }) => {
         <div className={styles.errorIcon}>⚠️</div>
         <h3>Ошибка загрузки</h3>
         <p>{error}</p>
-        <button onClick={() => window.location.reload()}>
+        <button 
+          onClick={refresh}
+          className={styles.retryButton}
+        >
           Попробовать снова
         </button>
       </div>
@@ -73,6 +80,12 @@ const GroupsPage = ({ onSelectGroup }) => {
             <div className={styles.emptyIcon}>👥</div>
             <h3>Нет групп</h3>
             <p>Вы еще не состоите ни в одной группе</p>
+            <button 
+              onClick={refresh}
+              className={styles.refreshButton}
+            >
+              Обновить список
+            </button>
           </div>
         )}
       </div>
@@ -82,6 +95,7 @@ const GroupsPage = ({ onSelectGroup }) => {
         group={joinModal.group}
         onJoin={handleJoinGroup}
         onClose={() => setJoinModal({ isOpen: false, group: null })}
+        loading={joinLoading}
       />
     </div>
   );

@@ -28,7 +28,7 @@ const Sidebar = ({ currentPage, onPageChange, selectedGroup }) => {
       guest: 'ScanEye',
       admin: 'Shield'
     };
-    return roleIcons[role] || 'User';
+    return roleIcons[role] || 'ScanEye';
   };
 
   const getRoleLabel = (role) => {

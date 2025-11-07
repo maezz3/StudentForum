@@ -3,7 +3,7 @@ import { apiService } from './apiService';
 export const groupService = {
   // Получить список групп пользователя
   async getUserGroups() {
-    return apiService.get('/users/me/groups');
+    return apiService.get(`/users/me/groups`);
   },
 
   // Получить информацию о группе
