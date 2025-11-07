@@ -33,6 +33,9 @@ cd StudentForum
 # Установка зависимостей
 npm install
 
+# Библиотека для изображения иконок
+npm install lucide-react
+
 # Запуск в режиме разработки
 npm start
 ```
@@ -42,14 +45,23 @@ npm start
 
 ```
 src/
-├── components/          # React компоненты
+├── components/         # React компоненты
+│   ├── announcements/  # Компоненты для объявлений
+│   ├── calendar/       # Компоненты для календаря
+│   ├── chat/           # Компоненты для чата
 │   ├── common/         # Общие компоненты (Header, Sidebar, etc.)
-│   └── [features]/     # Компоненты конкретных фич
+│   ├── files/          # Компоненты для файлообменника
+│   └── groups/         # Компоненты конкретных фич
 ├── pages/              # Страницы приложения
 │   ├── WelcomePage/    # Приветственная страница
 │   ├── AuthPage/       # Авторизация
-│   ├── GroupsPage/     # Список групп
-│   └── ...
+│   ├── AboutPage/      # О проекте
+│   ├── AnnouncementsPage/     # Объявления
+│   ├── CalendarPage/   # Страница календаря
+│   ├── ChatPage/       # Страница чата
+│   ├── FilesPage/      # Страница с файлами
+│   ├── ProfilePage/    # Пройиль пользователя
+│   └── GroupsPage/     # Список групп
 ├── context/            # React Context провайдеры
 │   ├── AuthContext.jsx # Контекст аутентификации
 │   └── ThemeContext.jsx # Контекст темы
